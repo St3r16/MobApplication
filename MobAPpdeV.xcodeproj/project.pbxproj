@@ -17,6 +17,9 @@
 		9E416D3A2640672600E2E63E /* Image_05.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E416D312640672600E2E63E /* Image_05.png */; };
 		9E416D3B2640672600E2E63E /* Image_08.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E416D322640672600E2E63E /* Image_08.png */; };
 		9E416D3C2640672600E2E63E /* BooksList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9E416D332640672600E2E63E /* BooksList.txt */; };
+		9E4F0F752642E0D000B9B0F0 /* PhotoLibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4F0F742642E0D000B9B0F0 /* PhotoLibraryViewController.swift */; };
+		9E4F0F832642E11D00B9B0F0 /* CollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4F0F822642E11D00B9B0F0 /* CollectionLayout.swift */; };
+		9E4F0F8F2642E15300B9B0F0 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4F0F8E2642E15300B9B0F0 /* ImageCell.swift */; };
 		9E68F0E52640780300C55442 /* BookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E68F0E42640780300C55442 /* BookViewController.swift */; };
 		9E68F0EB2640781B00C55442 /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E68F0E92640781B00C55442 /* DrawingViewController.swift */; };
 		9E68F0EC2640781B00C55442 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E68F0EA2640781B00C55442 /* ViewController.swift */; };
@@ -75,6 +78,9 @@
 		9E416D312640672600E2E63E /* Image_05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Image_05.png; sourceTree = "<group>"; };
 		9E416D322640672600E2E63E /* Image_08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Image_08.png; sourceTree = "<group>"; };
 		9E416D332640672600E2E63E /* BooksList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BooksList.txt; sourceTree = "<group>"; };
+		9E4F0F742642E0D000B9B0F0 /* PhotoLibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryViewController.swift; sourceTree = "<group>"; };
+		9E4F0F822642E11D00B9B0F0 /* CollectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionLayout.swift; sourceTree = "<group>"; };
+		9E4F0F8E2642E15300B9B0F0 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		9E68F0E42640780300C55442 /* BookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookViewController.swift; sourceTree = "<group>"; };
 		9E68F0E92640781B00C55442 /* DrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
 		9E68F0EA2640781B00C55442 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -179,12 +185,46 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		9E4F0F792642E10200B9B0F0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9E68F10C264078A300C55442 /* DrawingView.swift */,
+				9E68F10D264078A300C55442 /* DiagramView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9E4F0F7D2642E10600B9B0F0 /* TableCell */ = {
+			isa = PBXGroup;
+			children = (
+				9E68F113264078B600C55442 /* BookCell.swift */,
+			);
+			path = TableCell;
+			sourceTree = "<group>";
+		};
+		9E4F0F812642E10D00B9B0F0 /* CollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				9E4F0F8E2642E15300B9B0F0 /* ImageCell.swift */,
+			);
+			path = CollectionCell;
+			sourceTree = "<group>";
+		};
+		9E4F0F8A2642E12800B9B0F0 /* CollectionLayout */ = {
+			isa = PBXGroup;
+			children = (
+				9E4F0F822642E11D00B9B0F0 /* CollectionLayout.swift */,
+			);
+			path = CollectionLayout;
+			sourceTree = "<group>";
+		};
 		9E68F0F02640781E00C55442 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				9E68F0E92640781B00C55442 /* DrawingViewController.swift */,
 				9E68F0EA2640781B00C55442 /* ViewController.swift */,
 				9E68F0E42640780300C55442 /* BookViewController.swift */,
+				9E4F0F742642E0D000B9B0F0 /* PhotoLibraryViewController.swift */,
 				9EA81B31264151EF00ED17B8 /* DetailedBookController.swift */,
 				9EA81B3F2641549100ED17B8 /* NewBookController.swift */,
 			);
@@ -194,9 +234,10 @@
 		9E68F10B264078A300C55442 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9E68F10C264078A300C55442 /* DrawingView.swift */,
-				9E68F113264078B600C55442 /* BookCell.swift */,
-				9E68F10D264078A300C55442 /* DiagramView.swift */,
+				9E4F0F792642E10200B9B0F0 /* Views */,
+				9E4F0F7D2642E10600B9B0F0 /* TableCell */,
+				9E4F0F812642E10D00B9B0F0 /* CollectionCell */,
+				9E4F0F8A2642E12800B9B0F0 /* CollectionLayout */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -441,14 +482,17 @@
 			files = (
 				9EA81B4E26418DD200ED17B8 /* UIViewController.swift in Sources */,
 				9EBDC70C2640792700C959E4 /* AppDelegate.swift in Sources */,
+				9E4F0F752642E0D000B9B0F0 /* PhotoLibraryViewController.swift in Sources */,
 				9EA81B45264156D300ED17B8 /* DetailedBook.swift in Sources */,
 				9E68F114264078B600C55442 /* BookCell.swift in Sources */,
 				9EBDC70D2640792700C959E4 /* SceneDelegate.swift in Sources */,
+				9E4F0F8F2642E15300B9B0F0 /* ImageCell.swift in Sources */,
 				9E68F10E264078A300C55442 /* DrawingView.swift in Sources */,
 				9EA81B32264151EF00ED17B8 /* DetailedBookController.swift in Sources */,
 				9E68F0EB2640781B00C55442 /* DrawingViewController.swift in Sources */,
 				9E68F0EC2640781B00C55442 /* ViewController.swift in Sources */,
 				9EA81B402641549100ED17B8 /* NewBookController.swift in Sources */,
+				9E4F0F832642E11D00B9B0F0 /* CollectionLayout.swift in Sources */,
 				9E68F10F264078A300C55442 /* DiagramView.swift in Sources */,
 				9EA81B382641523200ED17B8 /* Bundle.swift in Sources */,
 				9E68F0E52640780300C55442 /* BookViewController.swift in Sources */,
