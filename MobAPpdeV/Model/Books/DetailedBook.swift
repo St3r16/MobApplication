@@ -1,13 +1,13 @@
 //
-//  Book.swift
+//  DetailedBook.swift
 //  MobAPpdeV
 //
-//  Created by sterbro on 5/3/21.
+//  Created by sterbro on 5/4/21.
 //
 
 import UIKit
 
-struct Book: Codable {
+struct DetailedBook: Codable {
     
     enum CodingKeys: String, CodingKey {
         
@@ -16,11 +16,25 @@ struct Book: Codable {
         case isbn13
         case price
         case imageName = "image"
+        case authors
+        case publisher
+        case pages
+        case year
+        case rating
+        case desc
         
+       
     }
     
     let title: String
     let subtitle: String
+    let authors: String
+    let publisher: String
+    let pages: String
+    let year: String
+    let rating: String
+    let desc: String
+    
     let isbn13: String
     let price: String
     let imageName: String
@@ -31,11 +45,6 @@ struct Book: Codable {
         }
         return UIImage(named: imageName)
     }
-    
-    
-}
-
-extension Book: Equatable {
     
     
 }

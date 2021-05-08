@@ -8,83 +8,130 @@
 import UIKit
 
 class BookViewController: UIViewController {
-    
-    private var books: [Book] = [] {
+
+    var filterMethod: ((Book) -> Bool) = { _ in
+        return true
+    } {
         didSet {
-            self.tableView.reloadData()
+            showingBooks = books.filter(filterMethod)
         }
     }
+    
+    var books: [Book] = [] {
+        didSet {
+            showingBooks = books.filter(filterMethod)
+        }
+    }
+    var showingBooks: [Book] = []
     @IBOutlet weak var tableView: UITableView!
+
+    var selectedBookIndex: Int?
+    var selectedBook: DetailedBook?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchUpBooks()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
+    }
 
     func fetchUpBooks() {
         do {
-        let books = try decodeBooks()
 
-            self.books = books
+            struct BookWrapper: Decodable {
+                let books: [Book]
+            }
 
+            let wrapper = try Bundle.main.decodeJSON("BooksList.txt", of: BookWrapper.self)
+
+            self.books = wrapper.books
+            self.tableView.reloadData()
         } catch {
 
-            let ac = UIAlertController(title: "Opps!", message: error.localizedDescription, preferredStyle: .alert)
-            let aa = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-            
-            ac.addAction(aa)
-            self.present(ac, animated: true, completion: nil)
+            showAlert(error: error)
 
         }
     }
     
-    func decodeBooks() throws -> [Book] {
-        
-        let decoder = JSONDecoder()
-        
-        struct BookWrapper: Decodable {
-            
-            let books: [Book]
-            
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? DetailedBookController,
+           let book = selectedBook {
+            vc.book = book
+        } else if let vc = segue.destination as? NewBookController {
+            vc.delegate = self
+        } else {
+            return
         }
-        
-        enum DecodeError: LocalizedError {
-            case invalidUrl
-            case invalidData
-            case invalidDecodeModel
-            
-            var errorDescription: String? {
-                switch self {
-                case .invalidData:
-                    return "Unable to retrieve data from file!"
-                case .invalidDecodeModel:
-                    return "Incompatible model!"
-                case .invalidUrl:
-                    return "Unable to find file in bundle!"
-                }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "DetailedBook" {
+
+            if let index = self.selectedBookIndex,
+               let book = try? Bundle.main.decodeJSON(showingBooks[index].isbn13 + ".txt", of: DetailedBook.self) {
+                self.selectedBook = book
+                return true
+            } else {
+                return false
             }
+        } else {
+            return true
+        }
+
+    }
+
+}
+
+extension BookViewController: UISearchBarDelegate {
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        defer {
+            self.tableView.reloadData()
         }
         
-        guard let url = Bundle.main.url(forResource: "BooksList", withExtension: "txt") else {
-            throw DecodeError.invalidUrl
+        guard !searchText.isEmpty else {
+            self.filterMethod = { _ in return true }
+            
+            return
         }
         
-        guard let data = try? Data(contentsOf: url) else {
-            throw DecodeError.invalidData
-        }
+        let lowercasedSearch = searchText.lowercased()
+
+        self.filterMethod = { $0.title.lowercased().contains(lowercasedSearch) }
         
-        guard let wrapper = try? decoder.decode(BookWrapper.self, from: data) else {
-            throw DecodeError.invalidDecodeModel
-        }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        return wrapper.books
+        defer {
+            searchBar.resignFirstResponder()
+        }
+
+        guard let searchText = searchBar.text, !searchText.isEmpty else {
+            return
+        }
+
+        self.searchBar(searchBar, textDidChange: searchText)
+
     }
 }
 
-extension BookViewController: UITableViewDelegate, UITableViewDataSource {
+extension BookViewController: NewBookViewControllerDelegate {
+
+    func createdNewBook(_ book: Book) {
+        self.books.append(book)
+    }
+
+}
+
+extension BookViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.books.count
+        return self.showingBooks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -92,10 +139,42 @@ extension BookViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.setUp(with: books[indexPath.row])
+        cell.setUp(with: showingBooks[indexPath.row])
         
         return cell
     }
     
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCell.EditingStyle.delete) {
+            let showingIndex = indexPath.row
+            let showingBook = showingBooks[showingIndex]
+            guard let allIndex = books.firstIndex(of: showingBook) else {
+                return
+            }
+            
+            books.remove(at: allIndex)
+            
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
+    
+}
+
+extension BookViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        selectedBookIndex = indexPath.row
+        return indexPath
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
 }
