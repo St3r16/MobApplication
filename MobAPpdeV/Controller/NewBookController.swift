@@ -123,10 +123,10 @@ class NewBookController: UIViewController {
                 if let doublePrice = Double(price) {
                     
                     let stringPrice = String(format: "$%.2f", doublePrice)
-                    let book = Book(title: title, subtitle: subtitle, isbn13: "", price: stringPrice, imageName: "")
+//                    let book = Book(title: title, subtitle: subtitle, isbn13: "", price: stringPrice, imageName: "")
                     
                     self.navigationController?.popViewController(animated: true)
-                    self.delegate?.createdNewBook(book)
+//                    self.delegate?.createdNewBook(book)
                 } else {
                     showAlert(error: BookInputError.invalidPrice)
                 }

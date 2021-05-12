@@ -239,14 +239,20 @@
                                     <outlet property="delegate" destination="LMR-wz-W5s" id="i9X-7o-X2Q"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="rrK-QF-0KU">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <color key="color" systemColor="systemGreenColor"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Tzb-Iu-h42"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="rrK-QF-0KU" firstAttribute="centerY" secondItem="kGM-Iz-8mB" secondAttribute="centerY" id="1do-KR-h9H"/>
                             <constraint firstItem="Tzb-Iu-h42" firstAttribute="trailing" secondItem="Gah-51-AIM" secondAttribute="trailing" id="Ah8-E6-xZ4"/>
                             <constraint firstItem="Gah-51-AIM" firstAttribute="leading" secondItem="Tzb-Iu-h42" secondAttribute="leading" id="K0p-TY-5Ok"/>
                             <constraint firstItem="Gah-51-AIM" firstAttribute="top" secondItem="Tzb-Iu-h42" secondAttribute="top" id="RJ0-OY-hbu"/>
                             <constraint firstItem="Tzb-Iu-h42" firstAttribute="bottom" secondItem="Gah-51-AIM" secondAttribute="bottom" id="ZrS-lA-a8N"/>
+                            <constraint firstItem="rrK-QF-0KU" firstAttribute="centerX" secondItem="kGM-Iz-8mB" secondAttribute="centerX" id="jna-Yl-xoW"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Books" id="f7O-73-RyI">
@@ -257,6 +263,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="rrK-QF-0KU" id="Wx2-sB-Fp5"/>
                         <outlet property="tableView" destination="Gah-51-AIM" id="UyG-ET-c0V"/>
                     </connections>
                 </viewController>
@@ -287,16 +294,23 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ue5-RE-vJK">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 </imageView>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="qcP-e1-Nee">
+                                                    <rect key="frame" x="6.5" y="6.5" width="37" height="37"/>
+                                                    <color key="color" systemColor="systemBlueColor"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="Ue5-RE-vJK" secondAttribute="bottom" id="0G4-Ma-bRi"/>
+                                                <constraint firstItem="qcP-e1-Nee" firstAttribute="centerX" secondItem="w4W-9f-9jd" secondAttribute="centerX" id="Alg-IV-3tq"/>
                                                 <constraint firstAttribute="trailing" secondItem="Ue5-RE-vJK" secondAttribute="trailing" id="DUC-Sr-lwv"/>
                                                 <constraint firstItem="Ue5-RE-vJK" firstAttribute="leading" secondItem="w4W-9f-9jd" secondAttribute="leading" id="I50-AF-ast"/>
+                                                <constraint firstItem="qcP-e1-Nee" firstAttribute="centerY" secondItem="w4W-9f-9jd" secondAttribute="centerY" id="b2t-pH-r1M"/>
                                                 <constraint firstItem="Ue5-RE-vJK" firstAttribute="top" secondItem="w4W-9f-9jd" secondAttribute="top" id="fYA-nt-cwk"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="qcP-e1-Nee" id="f2e-tA-k4j"/>
                                             <outlet property="imageView" destination="Ue5-RE-vJK" id="JGX-wD-7cz"/>
                                         </connections>
                                     </collectionViewCell>
@@ -306,6 +320,10 @@
                                     <outlet property="delegate" destination="pUp-DS-dxi" id="lTH-8e-loR"/>
                                 </connections>
                             </collectionView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="0Xj-PT-WzZ">
+                                <rect key="frame" x="188.5" y="432" width="37" height="37"/>
+                                <color key="color" systemColor="systemBlueColor"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="VWU-ri-uMx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -313,7 +331,9 @@
                             <constraint firstItem="Mf3-TC-WId" firstAttribute="leading" secondItem="VWU-ri-uMx" secondAttribute="leading" id="3YO-oP-bxm"/>
                             <constraint firstItem="VWU-ri-uMx" firstAttribute="trailing" secondItem="Mf3-TC-WId" secondAttribute="trailing" id="Bwv-wU-f1Y"/>
                             <constraint firstItem="Mf3-TC-WId" firstAttribute="top" secondItem="VWU-ri-uMx" secondAttribute="top" id="Fd1-Fd-v3e"/>
+                            <constraint firstItem="0Xj-PT-WzZ" firstAttribute="centerY" secondItem="VWU-ri-uMx" secondAttribute="centerY" id="GEo-3l-Lty"/>
                             <constraint firstItem="VWU-ri-uMx" firstAttribute="bottom" secondItem="Mf3-TC-WId" secondAttribute="bottom" id="rar-Ds-z1J"/>
+                            <constraint firstItem="0Xj-PT-WzZ" firstAttribute="centerX" secondItem="VWU-ri-uMx" secondAttribute="centerX" id="vs6-Jn-EUV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Photos" id="i7O-Fw-eKd">
@@ -324,12 +344,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="0Xj-PT-WzZ" id="Wmz-sL-bEk"/>
                         <outlet property="collectionView" destination="Mf3-TC-WId" id="yvF-Lo-rRm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZZ-kO-qIG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="958" y="1945"/>
+            <point key="canvasLocation" x="957.97101449275374" y="1944.6428571428571"/>
         </scene>
         <!--BOOOOOOK-->
         <scene sceneID="fnn-jc-y5H">
@@ -338,10 +359,23 @@
                     <view key="view" contentMode="scaleToFill" id="D1V-a8-rH5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="38x-39-Ep3">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <color key="color" systemColor="systemGreenColor"/>
+                            </activityIndicatorView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="okm-XA-ipa"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="38x-39-Ep3" firstAttribute="centerY" secondItem="D1V-a8-rH5" secondAttribute="centerY" id="JfW-y3-Ten"/>
+                            <constraint firstItem="38x-39-Ep3" firstAttribute="centerX" secondItem="D1V-a8-rH5" secondAttribute="centerX" id="Jnq-Fu-cHA"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="BOOOOOOK" id="O7A-xn-fTx"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="38x-39-Ep3" id="7AL-Z0-dc4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VDI-UT-Flh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -391,6 +425,12 @@
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Book: Codable {
+class Book: Codable {
     
     enum CodingKeys: String, CodingKey {
         
@@ -25,17 +25,11 @@ struct Book: Codable {
     let price: String
     let imageName: String
 
-    var preview: UIImage? {
-        guard !imageName.isEmpty else {
-            return UIImage(systemName: "multiply.circle")
-        }
-        return UIImage(named: imageName)
-    }
-    
-    
+    var preview: UIImage?
+
 }
 
-extension Book: Equatable {
-    
-    
-}
+//extension Book: Equatable {
+//    
+//    
+//}

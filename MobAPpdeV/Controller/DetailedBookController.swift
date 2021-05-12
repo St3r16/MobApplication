@@ -9,8 +9,9 @@ import UIKit
 
 class DetailedBookController: UIViewController {
     
-    var book: DetailedBook?
+    var book: Book?
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -95,12 +96,38 @@ class DetailedBookController: UIViewController {
 
     private func makePreparations() {
         installTitle()
-        if let book = book {
-            setupScrollView()
-            setupViews(with: book)
-        } else {
-            showNoBook()
+        setupScrollView()
+        loadBook(with: setupViews(with:))
+    }
+
+    private func loadBook(with completion: @escaping (DetailedBook) -> Void) {
+        guard let book = book else {
+            return
         }
+        guard let url = URL(string: "https://api.itbook.store/1.0/books/\(book.isbn13)") else {
+            return
+        }
+        
+        activityIndicator.startAnimating()
+        URLSession.shared.dataTask(with: URLRequest(url: url)) { (data, _, error) in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                }
+                return
+            }
+            guard let decoded = try? JSONDecoder().decode(DetailedBook.self, from: data) else {
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                }
+                return
+            }
+            DispatchQueue.main.async {
+                completion(decoded)
+                self.activityIndicator.stopAnimating()
+            }
+        }.resume()
+
     }
 
 }
@@ -114,7 +141,20 @@ extension DetailedBookController {
         bookImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         bookImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         bookImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+//        bookImageView.widthAnchor.constraint(equalToConstant: 200).isActive = true
         bookImageView.heightAnchor.constraint(equalTo: bookImageView.widthAnchor).isActive = true
+        
+        if let url = URL(string: book.imageName) {
+            DispatchQueue.global(qos: .background).async {
+                let data = try? Data(contentsOf: url)
+                if let data = data {
+                    DispatchQueue.main.async { self.bookImageView.image = UIImage(data: data) ?? UIImage(systemName: "book") }
+                } else {
+                    DispatchQueue.main.async { self.bookImageView.image = UIImage(systemName: "book") }
+                }
+            }
+        }
+        
         bookImageView.image = book.preview
 
 
